@@ -213,10 +213,14 @@ async function generateCoverLetter() {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Example: Do something with the received data
-  if (message.action === "submit" && message.apiKey && message.resumeText) {
+  if (message.action === "update-apiKey" && message.apiKey) {
     OPENAI_API_KEY = message.apiKey;
+    console.log("API UPDATE", OPENAI_API_KEY);
+  } else if (message.action === "update-resumeText" && message.resumeText) {
     MY_RESUME = message.resumeText;
+    console.log("RESUME UPDATE", MY_RESUME);
   }
+
 });
 
 
