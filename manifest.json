@@ -1,10 +1,16 @@
 {
-    "name": "Cover Letter Any-Click Extension",
+    "name": "Cover Letter Extension",
     "version": "1.0",
     "manifest_version": 3,
-    "description": "Logs each step in the page console on any click, generating a cover letter from OpenAI and creating a PDF with jsPDF.",
+    "description": "Generates a cover letter PDF from OpenAI when the extension icon is clicked, downloads it, and attaches it to a file input.",
     "permissions": ["activeTab", "scripting"],
     "host_permissions": ["*://*/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_title": "Generate Cover Letter"
+    },
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
