@@ -58,7 +58,7 @@ npm run build
 ⚠️ Every time you make changes to the source files, you must run npm run build again!
 
 🛠 Customization Tip:
-If you would like to change the current prompt, navigate to around line 64 in src/contentScripts.js and modify it there.
+If you would like to change the current promp to gpt, navigate to around line 64 in src/contentScripts.js and modify it there.
 
 💡 Reminder: After making any changes, don't forget to run npm run build again to apply the updates!
 
