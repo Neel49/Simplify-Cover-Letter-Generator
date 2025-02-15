@@ -6,7 +6,7 @@ This Chrome extension automates the process of generating a customized cover let
 
 ⭐ **Please star the repo if you like it and make a PR if you want to contribute!** I'm constantly updating this, so keep cloning it. **Please star the repo if you like it!**
 
-🔗 **[Click here to set up your OpenAI API key](https://platform.openai.com/signup/)**
+🔗 [**Click here to set up your OpenAI API key**](https://platform.openai.com/signup/)
 
 ---
 
@@ -35,21 +35,17 @@ npm init -y
 npm install jspdf
 npm install --save-dev webpack webpack-cli    
 npm install --save-dev babel-loader @babel/core @babel/preset-env
-npm install path-browserify os-browserify crypto-browserify
 ```
 
 ### 3️⃣ Configure Your OpenAI API Key
 
-- Create a `.env` file in the project root directory.
-- Add your OpenAI API key to the `.env` file:
-  ```env
-  OPENAI_API_KEY=your_openai_api_key_here
-  ```
+- Open `src/contentScript.js`.
+- Replace `const OPENAI_API_KEY = "INSERT YOUR APY KEY HERE";` on **line 8** with your actual OpenAI API key.
 
 ### 4️⃣ Add Your Resume and Change Prompt as Necessary
 
 - Open `src/contentScript.js`.
-- Replace the placeholder resume (`MY_RESUME` variable) with your actual resume details.
+- Copy and paste your resume at **around line 36** inside the `MY_RESUME` variable.
 - Modify the prompt (`prompt` variable) to better suit your job applications.
 
 ### 5️⃣ Build the Project
@@ -81,8 +77,8 @@ npm run build
 
 ### ⚠️ API Issues
 
-- Ensure your API key is correct and that it has sufficient access to the OpenAI API.
-- Check your `.env` file formatting and verify the key is being read correctly.
+- Ensure your API key is correctly placed in `src/contentScript.js` on **line 8**.
+- Make sure your API key is active and has sufficient access to the OpenAI API.
 
 ### ❌ Job Description Not Found
 
