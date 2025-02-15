@@ -1,5 +1,5 @@
 
-console.log = function() {};
+//console.log = function() {};
 
 // src/contentScript.js
 import { jsPDF } from "jspdf";
