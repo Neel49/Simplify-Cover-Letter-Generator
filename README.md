@@ -6,7 +6,7 @@ This Chrome extension automates the process of generating a customized cover let
 
 🔥 **ALSO, THIS ONLY WORKS ON GREENHOUSE APPLICATIONS RIGHT NOW**. (Working on getting it to work for Lever and Workday.)
 
-⭐ **Please star the repo if you like it and make a PR if you want to contribute!** I'm constantly updating this, so keep cloning it. **Please star the repo if you like it!**
+⭐ **Please star the repo if you like it and make a PR if you want to contribute!** We're constantly updating this, so keep cloning it. 
 
 🔗 [**Click here to set up your OpenAI API key**](https://platform.openai.com/signup/)
 
