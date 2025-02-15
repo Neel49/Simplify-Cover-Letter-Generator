@@ -1,0 +1,15 @@
+{
+    "name": "Cover Letter Any-Click Extension",
+    "version": "1.0",
+    "manifest_version": 3,
+    "description": "Logs each step in the page console on any click, generating a cover letter from OpenAI and creating a PDF with jsPDF.",
+    "permissions": ["activeTab", "scripting"],
+    "host_permissions": ["*://*/*"],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["dist/contentScript.bundle.js"]
+      }
+    ]
+  }
+  
