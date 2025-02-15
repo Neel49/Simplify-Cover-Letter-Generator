@@ -91,7 +91,6 @@ npm run build
 
 ## ⚠️ Notes
 
-- **🔒 This extension is for personal use only. Do not expose your OpenAI API key in a public repository.**
 - **💰 Be mindful of OpenAI API usage limits to avoid unexpected costs.**
 
 ---
