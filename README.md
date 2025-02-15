@@ -53,9 +53,14 @@ After configuring the API key and resume, run:
 npm run build
 ```
 
-⏳ **The build process may take up to 10 seconds.**
+⏳ The build process may take up to 10 seconds.
 
-⚠️ **Every time you make changes to the source files, you must run `npm run build` again!**
+⚠️ Every time you make changes to the source files, you must run npm run build again!
+
+🛠 Customization Tip:
+If you would like to change the current prompt, navigate to around line 64 in src/contentScripts.js and modify it there.
+
+💡 Reminder: After making any changes, don't forget to run npm run build again to apply the updates!
 
 ### 5️⃣ Load the Extension in Chrome
 
