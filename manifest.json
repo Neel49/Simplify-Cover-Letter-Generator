@@ -9,7 +9,8 @@
       "service_worker": "background.js"
     },
     "action": {
-      "default_title": "Generate Cover Letter"
+      "default_title": "Generate Cover Letter",
+      "default_popup": "popup.html"
     },
     "content_scripts": [
       {
