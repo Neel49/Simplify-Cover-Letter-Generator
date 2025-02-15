@@ -34,7 +34,6 @@ Open your terminal in the project directory and run the following commands:
 npm init -y
 npm install jspdf
 npm install --save-dev webpack webpack-cli    
-npm install --save-dev babel-loader @babel/core @babel/preset-env
 ```
 
 ### 3️⃣ Configure Your OpenAI API Key
