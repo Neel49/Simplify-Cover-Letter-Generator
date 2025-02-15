@@ -131,19 +131,22 @@ Skills _____________________________________________________________
   ${jobDescription}
 
   RESUME:
-  ${MY_RESUME}
+  ${localStorage.getItem("coverGen-resumeText")}
   `.trim();
   console.log("[ContentScript] Step 3: Constructed prompt for OpenAI:");
   console.log(prompt);
 
   // 5) Call OpenAI
+
+  console.log("API_KEY",localStorage.getItem("coverGen-apiKey"));
+
   console.log("[ContentScript] Step 4: Sending request to OpenAI...");
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_API_KEY}`,
+        "Authorization": `Bearer ${localStorage.getItem("coverGen-apiKey")}`,
       },
       body: JSON.stringify({
         model: "gpt-4o",
