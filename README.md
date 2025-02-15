@@ -33,7 +33,7 @@ Open your terminal in the project directory and run the following commands:
 ```bash
 npm init -y
 npm install jspdf
-npm install --save-dev webpack webpack-cli    
+npm install --save-dev webpack webpack-cli
 ```
 
 ### 3️⃣ Configure Your OpenAI API Key
