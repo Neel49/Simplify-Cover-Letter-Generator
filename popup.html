@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Extension</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #api-key-input, #resume-input {
+            width: 100%;
+            height: 30px;
+        }
+
+        #submit {
+            background-color: rgb(18, 161, 192);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #submit:hover {
+            background-color: rgb(15, 140, 170);
+        }
+    </style>
 </head>
 <body>
     <div class="main">
-      <h1>Enter Info</h1>
-      <div>
-        <input id="api-key-input" type="text" placeholder="Enter API Key">
-      </div>
-      <div>
-        <textarea id="resume-input" type="text" placeholder="Copy Paste Resume"></textarea>
-      </div>
-      <button id="submit">Submit</button>
+        <h1>Enter Info</h1>
+        <div>
+            <input id="api-key-input" type="text" placeholder="Enter API Key">
+        </div>
+        <div>
+            <input id="resume-input" type="text" placeholder="Copy Paste Resume">
+        </div>
+        <button id="submit">Submit</button>
     </div>
     <script src="popup.js"></script>
 </body>
