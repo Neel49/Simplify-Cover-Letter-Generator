@@ -1,7 +1,7 @@
 {
   "name": "simplify",
   "version": "1.0.0",
-  "description": "",
+  "description": "This Chrome extension automates the process of generating a customized cover letter using OpenAI's API. It extracts job descriptions from webpages, generates a tailored cover letter, converts it into a PDF, and automatically attaches it to the file input field on the job application page.",
   "main": "contentScript.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,8 +17,8 @@
     "@babel/core": "^7.26.9",
     "@babel/preset-env": "^7.26.9",
     "babel-loader": "^9.2.1",
+    "dotenv-webpack": "^8.1.0",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1"
   }
-  
 }

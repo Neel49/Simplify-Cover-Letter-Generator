@@ -1,5 +1,6 @@
 const path = require("path");
 
+
 module.exports = {
   mode: "production", // or "development" if you're still working on it
   entry: "./src/contentScript.js",
