@@ -2,9 +2,14 @@
 
 This Chrome extension automates the process of generating a customized cover letter using OpenAI's API. It extracts job descriptions from webpages, generates a tailored cover letter, converts it into a PDF, and automatically attaches it to the file input field on the job application page.
 
-🔥 This is similar to what Simplify Premium offers, but with our extension, you only pay for what you use through your OpenAI account. We don’t make any money from this—it simply lets you generate cover letters at cost, using your own API key.
+🔥 This is similar to what Simplify Premium offers, but with our extension, you only pay for what you use through your own OpenAI account.
 
-🔥 **ALSO, THIS ONLY WORKS ON GREENHOUSE APPLICATIONS RIGHT NOW**. (Working on getting it to work for Lever and Workday.)
+💰 No extra charges—we don’t make any money from this. Instead, you provide your own API key, and the extension generates cover letters at cost.
+
+📌 For reference: Each cover letter costs around 1-2 cents to generate, depending on length and model usage.
+
+🔥 ALSO, THIS ONLY WORKS ON GREENHOUSE APPLICATIONS RIGHT NOW.
+(🚧 We're working on adding support for Lever and Workday!)
 
 ⭐ **Please star the repo if you like it and make a PR if you want to contribute!** We're constantly updating this, so keep cloning it. 
 
