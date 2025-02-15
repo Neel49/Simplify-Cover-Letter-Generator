@@ -14,12 +14,13 @@ This Chrome extension automates the process of generating a customized cover let
 
 ## 🌟 Features
 
-- **📝 Automated Job Description Extraction**: Fetches job descriptions directly from the webpage (currently only works on Greenhouse job boards).
-- **📄 Customizable Resume and API Key Input**: Users can now input their API key and resume directly from the extension’s popup window.
-- **🖱️ Button-Based Cover Letter Generation**: A "Generate Cover Letter" button has been added to the bottom right corner of job application pages for easy access.
-- **🤖 AI-Powered Cover Letter Generation**: Uses OpenAI's GPT-4 API to generate a compelling, customized cover letter.
-- **📜 PDF Generation and Download**: Converts the generated cover letter into a professional PDF.
-- **📎 Auto-Attachment to Applications**: Automatically attaches the cover letter PDF to job applications that support file uploads.
+📄 Easy Resume & API Key Input: Enter API Key and RESUME directly from the extension popup.
+
+🖱️ One-Click Cover Letter Generation: A button at the bottom right corner of the screen will allow to generate and upload cover letters.
+
+🤖 AI-Powered Writing: Uses OpenAI's API to generate custom cover letters based on company.
+
+📎 Auto-Attachment: Automatically adds the cover letter as a PDF to job applications.
 
 ---
 
