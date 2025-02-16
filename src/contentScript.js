@@ -60,34 +60,48 @@ async function generateCoverLetter() {
   console.log("[ContentScript] Step 2: Using this resume:");
   console.log(MY_RESUME);
 
-  // 4) Construct the prompt
-  const prompt = `
- 
 
-  Write a creative, passionate, and human cover letter for the below job description. Below that is the candidate's resume. The cover letter should meet the following requirements:
+
+
+
+  const systemContent = `
+  You are a skilled assistant specializing in writing creative, engaging, and human-like cover letters. 
+  - Your goal is to generate a compelling and original cover letter tailored to the provided job description and candidate’s resume.
+  - The tone should be passionate, energetic, and uniquely engaging—avoid clichés or copying phrases from the job posting.
+  - The opening paragraph must have an attention-grabbing hook that highlights excitement for the industry and the company's impact.
+  - Include a highlighted section about the candidate’s most impressive project or research achievement, based on their resume.
+  - Keep it in plain text format—do not include headers, footers, or unnecessary formality.
+  - Use the example below as inspiration for the structure and tone. Do not copy its details.
   
-  Hook/Opening Paragraph:
-  Start with an outlandish, attention-grabbing hook that shows the candidate’s excitement about transforming the industry through innovative technology. Make it imaginative and original—do not copy phrases from the job posting. (For inspiration, see the example provided below.)
+  **Example Cover Letter (For Style Reference Only, Do Not Copy Details):**
   
-  **Project Achievement:**
-  Include a highlighted section about one of the candidate’s most impressive achievements, based on their resume. If applicable, prioritize research publications, major technical projects, or notable contributions.
+  Dear X Team,  
+  AI isn’t just about optimizing algorithms—it’s about shaping how people interact with the world. That’s what excites me about X’s mission. From powering real-time recommendations to reinforcing trust and safety at an unprecedented scale, your work is where machine learning meets impact. The chance to contribute to that—to push the limits of what AI can do in dynamic, high-stakes environments—is exactly why I’m applying.  
   
-  **Example for Style Reference (Do Not Copy Directly):
+  At SideFX, I worked on sparse neural networks, but not in the way most people think about them. The challenge wasn’t just making models faster—it was about rethinking how information flows through the network. Instead of relying on expensive global transformations, I designed a system that localized deformation computations, allowing certain calculations to be precomputed before training. The result? A neural network that ran leaner without sacrificing accuracy.  
   
-  Dear [Company Name] Team,
+  Beyond optimization, I care about making models that actually work in the wild. One of my proudest achievements is leading the authorship of a research paper, published at ICMLA 2024 (https://arxiv.org/abs/2406.13750)—a milestone few undergraduates can claim. My research tackled self-supervised vision transformers for medical imaging, where the problem wasn’t just classification—it was learning from unstructured, unannotated data. By leveraging self-training, I built a system that identified not just diseases like tuberculosis, but also symptoms like fibrosis—expanding the model’s scope without additional labels. That mindset—getting more from less, pushing models beyond their intended function—is something I bring to every project.  
   
-  The future of [industry] won’t be built by brute-force engineering—it will be [AI-first, scalable, or a similarly forward-thinking approach depending on the company]. That’s why I’m beyond excited about the opportunity to join [Company Name] as a [Job Title] and contribute to shaping the next generation of [industry technology].
+  More than anything, I love working in fast-moving, high-ownership environments where the next breakthrough is always one experiment away. I’m the kind of person who’ll spend hours tweaking loss functions—not because I have to, but because I need to see if I can push the model just a little further. And if X’s office has a fridge stocked with cold brew, even better.  
   
-  One of my proudest achievements is [candidate's top achievement, extracted from their resume]. This experience reinforced my passion for [key skill or industry impact] and strengthened my ability to [core skill relevant to the job description]. 
-  
-  Your Task:
-  Now, generate a cover letter for the below job description using the above instructions while ensuring that all required details and highlights are included. KEEP IT HUMAN and customize it based on the candidate’s experience. USE PLAIN TEXT ONLY. DO NOT TRY TO DO A HEADER OR ANYTHING. JUST THE COVER LETTER.
-  
+  I’d love to chat about how my experience in ML research, model optimization, and large-scale AI systems can contribute to X’s mission. Looking forward to the conversation!  
+  `.trim();
+
+
+
+  // 4) Construct the prompt
+  const userContent = `
+  Write a cover letter for the following job posting using the candidate’s resume. Follow the provided instructions and style guidelines.
+
+  [JOB DESCRIPTION]
   ${jobDescription}
 
-  RESUME:
+  [RESUME]
   ${MY_RESUME}
   `.trim();
+
+
+
   console.log("[ContentScript] Step 3: Constructed prompt for OpenAI:");
   console.log(prompt);
 
@@ -104,8 +118,8 @@ async function generateCoverLetter() {
       body: JSON.stringify({
         model: "gpt-4o",
         messages: [
-          { role: "system", content: "You are a helpful assistant." },
-          { role: "user", content: prompt }
+          { role: "system", content: systemContent },
+          { role: "user", content: userContent }
         ],
         max_tokens: 500,
       }),
