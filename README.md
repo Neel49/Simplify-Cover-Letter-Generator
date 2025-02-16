@@ -2,9 +2,14 @@
 
 This Chrome extension automates the process of generating a customized cover letter using OpenAI's API. It extracts job descriptions from webpages, generates a tailored cover letter, converts it into a PDF, and automatically attaches it to the file input field on the job application page.
 
-🔥 This is similar to what Simplify Premium offers, but with our extension, you only pay for what you use through your OpenAI account. We don’t make any money from this—it simply lets you generate cover letters at cost, using your own API key.
+🔥 This is similar to what Simplify Premium offers, but with our extension, you only pay for what you use through your own OpenAI account.
 
-🔥 **ALSO, THIS ONLY WORKS ON GREENHOUSE APPLICATIONS RIGHT NOW**. (Working on getting it to work for Lever and Workday.)
+💰 No extra charges—we don’t make any money from this. Instead, you provide your own API key, and the extension generates cover letters at cost.
+
+📌 For reference: Each cover letter costs around 1-2 cents to generate, depending on length and model usage.
+
+🔥 ALSO, THIS ONLY WORKS ON GREENHOUSE APPLICATIONS RIGHT NOW.
+(🚧 We're working on adding support for Lever and Workday!)
 
 ⭐ **Please star the repo if you like it and make a PR if you want to contribute!** We're constantly updating this, so keep cloning it. 
 
@@ -53,9 +58,14 @@ After configuring the API key and resume, run:
 npm run build
 ```
 
-⏳ **The build process may take up to 10 seconds.**
+⏳ The build process may take up to 10 seconds.
 
-⚠️ **Every time you make changes to the source files, you must run `npm run build` again!**
+⚠️ Every time you make changes to the source files, you must run npm run build again!
+
+🛠 Customization Tip:
+If you would like to change the current promp to gpt, navigate to around line 64 in src/contentScripts.js and modify it there.
+
+💡 Reminder: After making any changes, don't forget to run npm run build again to apply the updates!
 
 ### 5️⃣ Load the Extension in Chrome
 
@@ -91,7 +101,6 @@ npm run build
 
 ## ⚠️ Notes
 
-- **🔒 This extension is for personal use only. Do not expose your OpenAI API key in a public repository.**
 - **💰 Be mindful of OpenAI API usage limits to avoid unexpected costs.**
 
 ---
