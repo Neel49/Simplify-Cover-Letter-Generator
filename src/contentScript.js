@@ -6,8 +6,8 @@ import { jsPDF } from "jspdf";
 
 console.log("[ContentScript] Script loaded and listening for messages...");
 
-let OPENAI_API_KEY = "";
-let MY_RESUME = "";
+let OPENAI_API_KEY = (await chrome.storage.local.get(["apiKey"])).apiKey ?? "";
+let MY_RESUME = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "";
 
 
 
@@ -108,6 +108,7 @@ async function generateCoverLetter() {
   // 5) Call OpenAI
 
   console.log("[ContentScript] Step 4: Sending request to OpenAI...");
+  console.log("req", OPENAI_API_KEY, MY_RESUME);
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -237,7 +238,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     MY_RESUME = message.resumeText;
     console.log("RESUME UPDATE", MY_RESUME);
   }
-
 });
 
 

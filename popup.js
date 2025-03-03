@@ -6,26 +6,27 @@ const sendMessageToContent = (message) => {
 };
 
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async () => {
   const apiKeyInput = document.getElementById("api-key-input");
   const resumeInput = document.getElementById("resume-input");
 
+  const apiKey = await chrome.storage.local.get(["apiKey"]);
+
   // Load saved values from localStorage
-  apiKeyInput.value = localStorage.getItem("apiKey") || "";
-  resumeInput.value = localStorage.getItem("resumeText") || "";
+  apiKeyInput.value = (await chrome.storage.local.get(["apiKey"])).apiKey ?? "";
+  resumeInput.value = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "";
 
   sendMessageToContent({action: "update-apiKey", apiKey: apiKeyInput.value});
   sendMessageToContent({action: "update-resumeText", resumeText: resumeInput.value});
 
   // Save new values on input change
-  apiKeyInput.addEventListener("input", () => {
-      localStorage.setItem("apiKey", apiKeyInput.value);
-      sendMessageToContent({action: "update-apiKey", apiKey: apiKeyInput.value});
+  apiKeyInput.addEventListener("input", async () => {
+    await chrome.storage.local.set({apiKey: apiKeyInput.value});
+    sendMessageToContent({action: "update-apiKey", apiKey: apiKeyInput.value});
   });
 
-  resumeInput.addEventListener("input", () => {
-      localStorage.setItem("resumeText", resumeInput.value);
-      sendMessageToContent({action: "update-resumeText", resumeText: resumeInput.value});
+  resumeInput.addEventListener("input", async () => {
+    await chrome.storage.local.set({resumeText: resumeInput.value});
+    sendMessageToContent({action: "update-resumeText", resumeText: resumeInput.value});
   });
-
 });
