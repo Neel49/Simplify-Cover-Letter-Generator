@@ -3,7 +3,8 @@
 
 // src/contentScript.js
 import { jsPDF } from "jspdf";
-import { useAttachCoverLetter, createGenerateButton } from "./util";
+import { useAttachCoverLetter, useGenerateButton } from "./util";
+import { systemMessage } from "./prompts";
 
 console.log("[ContentScript] Script loaded and listening for messages...");
 
@@ -12,12 +13,11 @@ let MY_RESUME = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "
 
 
 // Create a button at the bottom-right of the webpage
-createGenerateButton({ onClick: generateCoverLetter });
+useGenerateButton({ onClick: generateCoverLetter });
 const {attachCoverLetter, jobDescription} = useAttachCoverLetter();
 
 // Main function to generate the cover letter, create a PDF, download it, and attach it.
 async function generateCoverLetter() {
-  
   try {
 
     const userContent = `
@@ -39,7 +39,7 @@ async function generateCoverLetter() {
       body: JSON.stringify({
         model: "gpt-4o",
         messages: [
-          { role: "system", content: systemContent },
+          { role: "system", content: systemMessage },
           { role: "user", content: userContent }
         ],
         max_tokens: 500,

@@ -1,6 +1,6 @@
 
 
-export const createGenerateButton = ({ onClick, ...props }) => {
+export const useGenerateButton = ({ onClick, ...props }) => {
   const generateButton = document.createElement("button");
   generateButton.id = "my-extension-generate-button";
   generateButton.textContent = "Generate Cover Letter";
@@ -23,7 +23,8 @@ export const createGenerateButton = ({ onClick, ...props }) => {
 export const useAttachCoverLetter = () => {
 
   const url = window.location.href;
-  const jobBoardPrefix = url.substring(); 
+  const jobBoardPrefix = url.substring(0, url.indexOf('/', 9));
+
 
   const attachCoverLetter = ( doc ) => {
     const pdfBlob = doc.output("blob");
@@ -36,7 +37,7 @@ export const useAttachCoverLetter = () => {
     downloadLink.click();
     document.body.removeChild(downloadLink);
 
-    const fileInput = coverletterInput[jobBoardPrefix];
+    const fileInput = coverletterInput(jobBoardPrefix);
 
     if (!fileInput) alert("Unable to find cover letter input!");
 
