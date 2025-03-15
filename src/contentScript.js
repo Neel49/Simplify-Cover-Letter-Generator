@@ -13,7 +13,7 @@ import { linkedin_icon} from "./linkedin_icon";
 import {my_resume} from "./my_resume";
 console.log("[DEBUG] github_icon value:", github_icon);
 
-console.log("[ContentScript]   try12 for messages...");
+console.log("[ContentScript]   try1 for messages...");
 
 let OPENAI_API_KEY = (await chrome.storage.local.get(["apiKey"])).apiKey ?? "";
 
@@ -98,11 +98,15 @@ async function generateCoverLetter() {
 ${jobDescription}
 #Resume
 ${MY_RESUME}
-#Prompt
-Keep it human however don't make it fruity and philosphoical. Keep it a little casual, don't talk about dancing or anything like that. 
-Keep it like a tech bro. Also tone it down a little. 
+
 Surround things that should be bolded with double stars E.g **Text to be bolded **
-Use link text for links: [someURL](someURL) 
+Hyperlink text exactly as:
+ [arxiv.org/abs/2406.13750](https://arxiv.org/abs/2406.13750)
+or:
+ [github.com/Neel49/WaterlooWorks-Navigator](https://github.com/Neel49/WaterlooWorks-Navigator)
+• Display text must match the URLs exactly, with no trailing commas or parentheses as part of the link.
+For example do not do this: [arxiv.org/abs/2406.13750](https://arxiv.org/abs/2406.13750)—an)
+Most importantly: Keep around 200 words and 
 
 
   `.trim();
@@ -157,7 +161,8 @@ Use link text for links: [someURL](someURL)
     // Extract the cover letter text
     let coverLetter = data?.choices?.[0]?.message?.content?.trim() || "";
     console.log("[ContentScript] Step 5: Half235etwert234 cover letter:");
-    console.log(coverLetter);
+    console.log("```\n" + coverLetter + "\n```");
+
 
     if (!coverLetter) {
       console.warn("[ContentScript] Cover letter 1 is empty.");
@@ -316,26 +321,29 @@ console.log("[DEBUG] Finished header section, cursorY now:", cursorY);
 
 
 
-
-
-
 // Tokens can be: plain, bold, or link.
 function parseMarkdown(text) {
   const tokens = [];
-  // Regex that matches either bold (**text**) or link ([text](url))
-  const regex = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
+  // This regex matches:
+  // 1. Bold text: **text**
+  // 2. Markdown links: [link text](url)
+  // 3. Bare URLs: e.g., arxiv.org/abs/2406.13750 or https://github.com/...
+  const regex = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|\b((https?:\/\/)?[\w.-]+\.[\w]{2,}(\/\S*)?))/g;
   let lastIndex = 0;
   let match;
+  
   while ((match = regex.exec(text)) !== null) {
+    // Push any plain text that occurs before the matched token.
     if (match.index > lastIndex) {
       tokens.push({ type: "plain", text: text.substring(lastIndex, match.index) });
     }
     const tokenText = match[0];
+    
     if (tokenText.startsWith("**")) {
       // Bold token: remove the surrounding '**'
       tokens.push({ type: "bold", text: tokenText.slice(2, -2) });
     } else if (tokenText.startsWith("[")) {
-      // Link token in the format: [link text](url)
+      // Markdown link token: [link text](url)
       const innerRegex = /\[([^\]]+)\]\(([^)]+)\)/;
       const innerMatch = innerRegex.exec(tokenText);
       if (innerMatch) {
@@ -343,14 +351,38 @@ function parseMarkdown(text) {
       } else {
         tokens.push({ type: "plain", text: tokenText });
       }
+    } else {
+      // This should be a bare URL.
+      let url = tokenText;
+      let trailingPunct = "";
+      // Check for unwanted trailing punctuation (like ')', ',', or '.')
+      const punctMatch = url.match(/([),.]+)$/);
+      if (punctMatch) {
+        trailingPunct = punctMatch[0];
+        url = url.slice(0, -trailingPunct.length);
+      }
+      // If the URL doesn't start with http or https, assume https.
+      if (!/^https?:\/\//i.test(url)) {
+        url = "https://" + url;
+      }
+      // Wrap the URL display text in brackets.
+      tokens.push({ type: "link", text: "("+ url + ")", url });
+      // Append any trailing punctuation as a separate plain token.
+      if (trailingPunct) {
+        tokens.push({ type: "plain", text: trailingPunct });
+      }
     }
     lastIndex = regex.lastIndex;
   }
+  
+  // Add any remaining plain text after the last match.
   if (lastIndex < text.length) {
     tokens.push({ type: "plain", text: text.substring(lastIndex) });
   }
   return tokens;
 }
+
+
 
 // Render a paragraph with inline formatting and wrapping.
 // It parses the paragraph into tokens and then splits them into words
