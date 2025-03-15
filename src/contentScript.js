@@ -12,15 +12,16 @@ let OPENAI_API_KEY = (await chrome.storage.local.get(["apiKey"])).apiKey ?? "";
 let MY_RESUME = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "";
 
 // Create a button at the bottom-right of the webpage
-useGenerateButton({ onClick: generateCoverLetter });
+const {setButtonLoading, setButtonActive} = useGenerateButton({ onClick: generateCoverLetter });
 const { attachCoverLetter, jobDescription } = await useAttachCoverLetter();
 
+setButtonActive();
 console.log("Job Desc", jobDescription);
 
 // Main function to generate the cover letter, create a PDF, download it, and attach it.
 async function generateCoverLetter() {
   try {
-
+    setButtonLoading();
     const userContent = `
     Write a cover letter for the following job posting using the candidate’s resume. Follow the provided instructions and style guidelines.
   
@@ -101,6 +102,8 @@ async function generateCoverLetter() {
 
   } catch (error) {
     console.error("[ContentScript] Exception calling OpenAI:", error);
+  } finally {
+    setButtonActive();
   }
 }
 
