@@ -13,16 +13,31 @@ import { linkedin_icon} from "./linkedin_icon";
 import {my_resume} from "./my_resume";
 console.log("[DEBUG] github_icon value:", github_icon);
 
-console.log("[ContentScript]   try7 for messages...");
+console.log("[ContentScript]   try12 for messages...");
 
 let OPENAI_API_KEY = (await chrome.storage.local.get(["apiKey"])).apiKey ?? "";
 
 let MY_RESUME = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "";
 
 
+// const whatever = new jsPDF({
+//   unit: "pt",
+//   format: "letter",
+// });
 
+// whatever.setFont("Calibri", "normal"); // or "helvetica" if not embedding
+// whatever.setFontSize(16);
 
+// // 4) Set link color to blue
+// whatever.setTextColor(0, 0, 255);
 
+// // 5) Render link text
+// whatever.textWithLink("This should be a BLUE link", 20, 20, {
+//   url: "https://example.com"
+// });
+
+// // 6) Save or view the PDF
+// whatever.save("test.pdf");
 
 // Create a button at the bottom-right of the webpage
 const generateButton = document.createElement("button");
@@ -81,8 +96,13 @@ async function generateCoverLetter() {
   
 # Job Description
 ${jobDescription}
-
-
+#Resume
+${MY_RESUME}
+#Prompt
+Keep it human however don't make it fruity and philosphoical. Keep it a little casual, don't talk about dancing or anything like that. 
+Keep it like a tech bro. Also tone it down a little. 
+Surround things that should be bolded with double stars E.g **Text to be bolded **
+Use link text for links: [someURL](someURL) 
 
 
   `.trim();
