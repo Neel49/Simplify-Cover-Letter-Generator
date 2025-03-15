@@ -11,10 +11,11 @@ console.log("[ContentScript] Script loaded and listening for messages...");
 let OPENAI_API_KEY = (await chrome.storage.local.get(["apiKey"])).apiKey ?? "";
 let MY_RESUME = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "";
 
-
 // Create a button at the bottom-right of the webpage
 useGenerateButton({ onClick: generateCoverLetter });
-const {attachCoverLetter, jobDescription} = useAttachCoverLetter();
+const { attachCoverLetter, jobDescription } = await useAttachCoverLetter();
+
+console.log("Job Desc", jobDescription);
 
 // Main function to generate the cover letter, create a PDF, download it, and attach it.
 async function generateCoverLetter() {

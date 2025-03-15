@@ -14,7 +14,7 @@
     },
     "content_scripts": [
       {
-        "matches": ["https://job-boards.greenhouse.io/*", "https://boards.greenhouse.io/*"],
+        "matches": ["https://job-boards.greenhouse.io/*", "https://boards.greenhouse.io/*", "https://jobs.lever.co/*"],
         "js": ["dist/contentScript.bundle.js"]
       }
     ]

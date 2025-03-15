@@ -20,11 +20,10 @@ export const useGenerateButton = ({ onClick, ...props }) => {
   generateButton.onclick = onClick;
 };
 
-export const useAttachCoverLetter = () => {
+export const useAttachCoverLetter = async () => {
 
-  const url = window.location.href;
-  const jobBoardPrefix = url.substring(0, url.indexOf('/', 9));
-
+  const jobBoard = window.location.hostname;
+  const jobPath = window.location.pathname.split('/');
 
   const attachCoverLetter = ( doc ) => {
     const pdfBlob = doc.output("blob");
@@ -37,7 +36,7 @@ export const useAttachCoverLetter = () => {
     downloadLink.click();
     document.body.removeChild(downloadLink);
 
-    const fileInput = coverletterInput(jobBoardPrefix);
+    const fileInput = coverletterInput(jobBoard);
 
     if (!fileInput) alert("Unable to find cover letter input!");
 
@@ -50,24 +49,36 @@ export const useAttachCoverLetter = () => {
     fileInput.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
-  const jobDescription = getJobDescription(jobBoardPrefix);
+  let jobDescription = getJobDescription(jobBoard);
+  cacheJobDescription(jobDescription, jobBoard, jobPath);
+
+  if (!jobDescription && jobBoard === "jobs.lever.co") {
+    console.log("Getting from cache");
+    jobDescription = (await chrome.storage.local.get([jobPath[1]])[jobPath[1]]);
+  }
 
   return { attachCoverLetter, jobDescription };
 }
 
+const cacheJobDescription = (jobDescription, jobBoard, jobPath) => {
+  if (jobDescription && jobBoard === "jobs.lever.co") {
+    console.log("Saving to cache!")
+    chrome.storage.local.set({ [jobPath[1]]: jobDescription });
+  }
+}
 
-const coverletterInput = (jobBoardPrefix) => {
-  switch (jobBoardPrefix) {
-    case "https://job-boards.greenhouse.io":
+const coverletterInput = (jobBoard) => {
+  switch (jobBoard) {
+    case "job-boards.greenhouse.io":
       return document.querySelector(`#cover_letter`);
     default:
       return null;
   }
 };
 
-const getJobDescription = (jobBoardPrefix) => {
-  switch (jobBoardPrefix) {
-    case "https://job-boards.greenhouse.io":
+const getJobDescription = (jobBoard) => {
+  switch (jobBoard) {
+    case "job-boards.greenhouse.io":
       return document.querySelector(".job__description.body")?.innerText.trim() ?? "";
     default:
       return "";
