@@ -3,7 +3,7 @@
 
 // src/contentScript.js
 import { jsPDF } from "jspdf";
-import { useAttachCoverLetter, useGenerateButton } from "./util";
+import { useAttachCoverLetter, createGenerateButton } from "./util";
 
 console.log("[ContentScript] Script loaded and listening for messages...");
 
@@ -12,7 +12,7 @@ let MY_RESUME = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "
 
 
 // Create a button at the bottom-right of the webpage
-useGenerateButton({ onClick: generateCoverLetter });
+createGenerateButton({ onClick: generateCoverLetter });
 const {attachCoverLetter, jobDescription} = useAttachCoverLetter();
 
 // Main function to generate the cover letter, create a PDF, download it, and attach it.

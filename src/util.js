@@ -1,6 +1,6 @@
 
 
-export const useGenerateButton = ({ onClick, ...props }) => {
+export const createGenerateButton = ({ onClick, ...props }) => {
   const generateButton = document.createElement("button");
   generateButton.id = "my-extension-generate-button";
   generateButton.textContent = "Generate Cover Letter";
@@ -26,13 +26,12 @@ export const useAttachCoverLetter = () => {
   const jobBoardPrefix = url.substring(); 
 
   const attachCoverLetter = ( doc ) => {
-
     const pdfBlob = doc.output("blob");
 
     const downloadLink = document.createElement("a");
     downloadLink.href = URL.createObjectURL(pdfBlob);
     downloadLink.download = "CoverLetter.pdf";
-    
+
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
