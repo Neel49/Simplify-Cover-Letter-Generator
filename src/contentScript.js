@@ -1,7 +1,3 @@
-
-//console.log = function() {};
-
-// src/contentScript.js
 import { jsPDF } from "jspdf";
 import { useAttachCoverLetter, useGenerateButton } from "./util";
 import { systemMessage } from "./prompts";

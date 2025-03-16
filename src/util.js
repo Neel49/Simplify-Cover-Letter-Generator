@@ -1,37 +1,31 @@
-
+import { style } from "./const";
 
 export const useGenerateButton = ({ onClick, ...props }) => {
   const generateButton = document.createElement("button");
-  generateButton.id = "my-extension-generate-button";
+  generateButton.id = "generate-button";
 
-  generateButton.style.position = "fixed";
-  generateButton.style.bottom = "20px";
-  generateButton.style.right = "20px";
-  generateButton.style.zIndex = "9999";
-  generateButton.style.padding = "10px 20px";
-  generateButton.style.boxSizing = "border-box";
-  generateButton.style.backgroundColor = "rgb(18 161 192)";
-  generateButton.style.fontFamily = "Untitled Sans";
-  generateButton.style.color = "#fff";
-  generateButton.style.border = "none";
-  generateButton.style.borderRadius = "5px";
-  generateButton.style.cursor = "pointer";
+  const spinner = document.createElement("div");
+  spinner.id = "spinner";
 
+  generateButton.appendChild(spinner);
+
+  document.head.appendChild(style);
   document.body.appendChild(generateButton);
 
   generateButton.onclick = onClick;
 
   const setButtonLoading = () => {
-    generateButton.textContent = "Loading...";
-    generateButton.style.backgroundColor = "gray";
+    generateButton.textContent = "";
+    spinner.style.display = 'inline-block'; 
+    generateButton.disabled = true;
   };
 
   const setButtonActive = () => {
-    generateButton.textContent = "Generate Cover Letter";
-    generateButton.style.backgroundColor = "rgb(18 161 192)";
+    generateButton.disabled = false;
+    generateButton.textContent = "Generate ✨";
   };
 
-  return {setButtonLoading, setButtonActive};
+  return { setButtonLoading, setButtonActive };
 };
 
 export const useAttachCoverLetter = async () => {
