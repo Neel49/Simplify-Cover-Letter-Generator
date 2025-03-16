@@ -1,5 +1,7 @@
 const style = document.createElement('style');
 style.innerHTML = `
+  @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap'); 
+
   #generate-button {
     background-color: white;
     position: fixed;
@@ -9,7 +11,7 @@ style.innerHTML = `
     height: 30px;
     padding: 6px 14px;
     box-sizing: border-box;
-    font-family: "Untitled Sans";
+    font-family: "Geist", sans-serif;
     color: black;
     border: 1px solid lightgray;
     border-radius: 5px;
