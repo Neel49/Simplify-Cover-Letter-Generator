@@ -15,12 +15,13 @@ export const useGenerateButton = ({ onClick, ...props }) => {
   generateButton.onclick = onClick;
 
   const setButtonLoading = () => {
-    generateButton.textContent = "";
-    spinner.style.display = 'inline-block'; 
+    generateButton.textContent = null;
+    generateButton.appendChild(spinner);
     generateButton.disabled = true;
   };
 
   const setButtonActive = () => {
+    generateButton.removeChild(spinner);
     generateButton.disabled = false;
     generateButton.textContent = "Generate ✨";
   };

@@ -10,11 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const apiKeyInput = document.getElementById("api-key-input");
   const resumeInput = document.getElementById("resume-input");
 
-  const apiKey = await chrome.storage.local.get(["apiKey"]);
-
   // Load saved values from localStorage
-  apiKeyInput.value = (await chrome.storage.local.get(["apiKey"])).apiKey ?? "";
-  resumeInput.value = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "";
+  apiKeyInput.value = (await chrome.storage.local.get(["apiKey"]))?.apiKey ?? "";
+  resumeInput.value = (await chrome.storage.local.get(["resumeText"]))?.resumeText ?? "";
 
   sendMessageToContent({action: "update-apiKey", apiKey: apiKeyInput.value});
   sendMessageToContent({action: "update-resumeText", resumeText: resumeInput.value});

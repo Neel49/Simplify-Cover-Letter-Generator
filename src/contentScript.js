@@ -4,8 +4,8 @@ import { systemMessage } from "./prompts";
 
 console.log("[ContentScript] Script loaded and listening for messages...");
 
-let OPENAI_API_KEY = (await chrome.storage.local.get(["apiKey"])).apiKey ?? "";
-let MY_RESUME = (await chrome.storage.local.get(["resumeText"])).resumeText ?? "";
+let OPENAI_API_KEY = (await chrome.storage.local.get(["apiKey"]))?.apiKey ?? "";
+let MY_RESUME = (await chrome.storage.local.get(["resumeText"]))?.resumeText ?? "";
 
 // Create a button at the bottom-right of the webpage
 const {setButtonLoading, setButtonActive} = useGenerateButton({ onClick: generateCoverLetter });

@@ -18,6 +18,9 @@ style.innerHTML = `
     cursor: pointer;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
     z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #generate-button:hover {
@@ -26,6 +29,7 @@ style.innerHTML = `
 
   #generate-button:disabled {
     box-shadow: inset 100px 100px rgba(0,0,0,0.05);
+    cursor: default;
   }
 
   @keyframes spin {
@@ -51,8 +55,6 @@ style.innerHTML = `
     top: 50%;
     left: 50%;
     margin: auto;
-
-    display: none;
   }
 `;
 
