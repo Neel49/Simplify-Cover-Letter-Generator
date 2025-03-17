@@ -64,9 +64,16 @@ body {
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+  box-sizing: border-box;
 }
 
 #save-button:hover {
   box-shadow: inset 100px 100px rgba(255, 255, 255, 0.2);
 }
 
+#timestamp {
+  color: gray;
+  font-size: 8pt;
+  margin-top: 4px;
+  margin-left: 2px;
+}

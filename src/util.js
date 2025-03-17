@@ -23,7 +23,7 @@ export const useGenerateButton = ({ onClick, ...props }) => {
   const setButtonActive = () => {
     generateButton.removeChild(spinner);
     generateButton.disabled = false;
-    generateButton.textContent = "Generate ✨";
+    generateButton.textContent = "Generate";
   };
 
   return { setButtonLoading, setButtonActive };
