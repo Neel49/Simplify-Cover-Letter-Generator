@@ -1,0 +1,32 @@
+def solution(s):
+    vowels = ["a", "e", "i", "o", "u"]
+    new_word = ""
+    
+    # Lists to hold vowels and their indices
+    reversed_order_letter = []
+    reversed_order_index = []
+    
+    # 1) Collect vowels and their positions
+    for i in range(len(s)):
+        if s[i] in vowels:
+            reversed_order_letter.append(s[i])   # The vowel character
+            reversed_order_index.append(i)       # The index of this vowel
+    
+    # 2) Reverse the collected vowels
+    reversed_order_letter = reversed_order_letter[::-1]
+    
+
+    vowel_idx = 0
+    for i in range(len(s)):
+        if i in reversed_order_index:
+            # Replace with the next reversed vowel
+            new_word += reversed_order_letter[vowel_idx]
+            vowel_idx += 1
+        else:
+            # Non-vowel character remains the same
+            new_word += s[i]
+    
+    return new_word
+
+
+print(solution("Uaotye"))
